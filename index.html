@@ -11,7 +11,7 @@
 
   <h1>Welcome to TICKLE</h1>
   <div>
-    <form id="insurance-form">
+    <form id="insurance-form" action="">
       <label for="name">Please enter your first name</label>
       <input type="text" id="name" required>
 
@@ -19,14 +19,14 @@
       <input type="number" id="age" min="18" required>
 
       <p>Please select your gender:</p>
-      <input type="radio" name="gender" class="gender" value="male"> Male<br>
-      <input type="radio" name="gender" class="gender" value="female"> Female<br>
+      <input type="radio" name="gender" id="gender" value="male"> Male<br>
+      <input type="radio" name="gender" id="gender" value="female"> Female<br>
 
       <select name="conditions" id="health-condition">
         <option value="none">None</option>
         <option value="allergies">Allergies</option>
-        <option value="sleep-apnea">Sleep Apnea</option>
-        <option value="heart-disease">Heart Disease</option>
+        <option value="sleep apnea">Sleep Apnea</option>
+        <option value="heart disease">Heart Disease</option>
       </select>
 
       <button>See Your Estimate</button>

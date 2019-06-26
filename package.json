@@ -10,5 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "seori",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
 }

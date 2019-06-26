@@ -5,19 +5,19 @@
 const healthConditions = [
   {
     issue: 'allergies',
-    costIncrease: .01
+    costIncrease: 0.01
   },
   {
     issue: 'sleep apnea',
-    costIncrease: .06
+    costIncrease: 0.06
   },
   {
     issue: 'heart disease',
-    costIncrease: .17
+    costIncrease: 0.17
   },
   {
     issue: 'none',
-    costIncrease: 0
+    costIncrease: 0.0
 
   }
 
@@ -31,26 +31,34 @@ function adjustedCost(age) {
     console.log('This insurance policy is not available for those under 18 at this time.')
     
 
-  } else {
+  } 
     let ageDifference = age - minAge
 
-    let multiplier = Math.floor(ageDifference / 5) // 25-18 =  7 7/5 = 1.4 --> 1 * 20
+    let multiplier = Math.floor(ageDifference / 5);
 
-    let newCost = multiplier * 20;
-    return baseCost + newCost;
-  }
+    return multiplier;
+
+    
   
+  
+
+}
+
+function baseByTwenty(fiveYears){
+  let base = 100;
+  let additionalCost = fiveYears * 20;
+  return base + additionalCost;
 
 }
 
 function returnCostIncrease(healthCondition, newCost) {
   let conditionPercent = healthConditions.filter(condition => condition.issue === healthCondition)
-console.log(conditionPercent)
+
   let costFactor = conditionPercent[0].costIncrease //the pure factor percentage 
   let conditionBasePercentage = costFactor * newCost;
   let estimatedQuote = newCost + conditionBasePercentage
 
-  return estimatedQuote
+  return estimatedQuote;
 
 }
 
@@ -76,10 +84,12 @@ function femaleDiscount(newEstimatedQuote) {
 
 function quoteCreater(person) {
   let age = person.age;
-  let issue = person.condition;
-  let newBaseCost = returnCostIncrease(issue,  adjustedCost(age) );
-
-  return person.gender === 'female' ? femaleDiscount(newBaseCost) : newBaseCost;
+  let issue = person.issue;
+  // let newBaseCost = returnCostIncrease(issue,  adjustedCost(age) );
+let fiveYearBlock = adjustedCost(age);
+let newBaseCost = baseByTwenty(fiveYearBlock);
+let baseCostWithIssues = returnCostIncrease(issue, newBaseCost);
+  return person.gender === 'female' ? femaleDiscount(baseCostWithIssues) : baseCostWithIssues;
   
 }
 
@@ -90,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let client = {}
   client.name = document.getElementById('name').value;
   client.age = document.getElementById('age').value;
-  client.gender = document.getElementsByClassName("gender").value;
-  client.issue = document.getElementsByClassName("condition").value;
+  client.gender = document.getElementById("gender").value;
+  client.issue = document.getElementById("health-condition").value;
   let quote = quoteCreater(client)
 
 
@@ -102,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     let priceDisplay = document.getElementById("your-price")
-    priceDisplay.innerHTML = quote;
+    priceDisplay.innerHTML = 'Your Estimated Quote is: '+ quote;
 
   })
 })
