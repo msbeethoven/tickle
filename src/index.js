@@ -26,13 +26,14 @@ const healthConditions = [
 
 function ageValidator(age) {
   let minAge = 18;
-  if (age >= minAge) {
-    let ageDifference = age - minAge
-    let multiplier = Math.floor(ageDifference / 5);
-    return multiplier;
+  if (age < minAge) {
+    alert('This insurance policy is not available for those under 18 at this time.')
+    
   } 
 
-  alert('This insurance policy is not available for those under 18 at this time.')
+  let ageDifference = age - minAge
+    let multiplier = Math.floor(ageDifference / 5);
+    return multiplier;
 }
 
 function baseByTwenty(fiveYears){
@@ -54,13 +55,13 @@ function returnCostIncrease(healthCondition, newCost) {
 
 function femaleDiscount(newEstimatedQuote) {
   let femDiscount = 12;
-  return newEstimatedQuote - femDiscount
+  let femaleFinalDiscount = newEstimatedQuote - femDiscount;
+  return (femaleFinalDiscount).toFixed(2)
 }
 
 
 function quoteCreator (customer){
   let age = customer.age
-  console.log(age)
   let healthIssue = customer.issue
   let fiveYrBlocks = ageValidator(age)
   let newBaseQuote = baseByTwenty(fiveYrBlocks)
@@ -68,33 +69,28 @@ function quoteCreator (customer){
   return customer.gender === 'female' ? femaleDiscount(baseCostAndConditions) : baseCostAndConditions
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   document.getElementById('insurance-form').addEventListener('submit', submit)
-// })
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('insurance-form').addEventListener('submit', submit)
+})
 
-// function submit (e) {
-//   e.preventDefault()
-//   let newCustomer = {} //Customer's state. 
-//   newCustomer.name = document.getElementById('name').value
-//   newCustomer.age = document.getElementById('age').value
-//   newCustomer.gender = document.querySelector('input[name="gender"]:checked').value
-//   newCustomer.issue = document.getElementById('health-condition').value
-//   let quote = quoteCreator(newCustomer)
-//   console.log(newCustomer)
-//   displayQuote(newCustomer, quote)
-// }
-
-// function displayQuote (newCustomer, quote) {
-//   let priceDisplay = document.getElementById("your-price")
-//   priceDisplay.innerHTML = 'Your Estimated Quote is: '+ quote;
-// }
-
-module.exports = {
-  ageValidator,
-  baseByTwenty,
-  returnCostIncrease,
-  femaleDiscount
+function submit (e) {
+  e.preventDefault()
+  let newCustomer = {} //Customer's state. 
+  newCustomer.name = document.getElementById('name').value
+  newCustomer.age = document.getElementById('age').value
+  newCustomer.gender = document.querySelector('input[name="gender"]:checked').value
+  newCustomer.issue = document.getElementById('health-condition').value
+  let quote = quoteCreator(newCustomer)
+  console.log(newCustomer)
+  displayQuote(newCustomer, quote)
 }
+
+function displayQuote (newCustomer, quote) {
+  let name = newCustomer.name;
+  let priceDisplay = document.getElementById("your-price")
+  priceDisplay.innerHTML = `${name}, your estimated quote is $${quote}`
+}
+
 
 
 

@@ -1,47 +1,61 @@
-const conditions = [
+const healthConditions = [
   {
-    name: 'allergies',
-    factor: 0.01
+    issue: 'allergies',
+    costIncrease: 0.01
   },
   {
-    name: 'sleep apnea',
-    factor: 0.06
+    issue: 'sleep apnea',
+    costIncrease: 0.06
   },
   {
-    name: 'heart disease',
-    factor: 0.17
+    issue: 'heart disease',
+    costIncrease: 0.17
+  },
+  {
+    issue: 'none',
+    costIncrease: 0.0
+
   }
 ]
 
-const yrsOverEighteen = (age) => {
-  let minimum = 18
-  if (age < 18) {
-    return 'Life insurance is not available for people under age 18'
-  }
-  let totalYrs = age - minimum
-  return Math.floor(totalYrs / 5)
+function ageValidator(age) {
+  let minAge = 18;
+  if (age < minAge) {
+    return 'This insurance policy is not available for those under 18 at this time.'
+    
+  } 
+
+  let ageDifference = age - minAge
+    let multiplier = Math.floor(ageDifference / 5);
+    return multiplier;
 }
 
-const calculateNewBaseCost = (fiveYrBlocks) => {
-  let base = 100
-  let additionalCost = fiveYrBlocks * 20
-  return base + additionalCost
+function baseByTwenty(fiveYears){
+  let base = 100;
+  let additionalCost = fiveYears * 20;
+  return base + additionalCost;
+
 }
 
-const conditionFactor = (conditionName, newBaseCost) => {
-  let conditionObj = conditions.filter(condition => condition.name === conditionName)
-  let factor = conditionObj[0].factor
-  let extra = newBaseCost * factor
-  return newBaseCost + extra
+function returnCostIncrease(healthCondition, newCost) {
+  let conditionPercent = healthConditions.filter(condition => condition.issue === healthCondition);
+  let costFactor = conditionPercent[0].costIncrease //the pure factor percentage 
+  let conditionBasePercentage = costFactor * newCost;
+  let estimatedQuote = newCost + conditionBasePercentage
+  return estimatedQuote;
+
 }
 
-const femaleDiscount = (baseCostPlusConditions) => {
-  return (baseCostPlusConditions - 12).toFixed(2)
+function femaleDiscount(newEstimatedQuote) {
+  let femDiscount = 12;
+  let femaleFinalDiscount = newEstimatedQuote - femDiscount;
+  return (femaleFinalDiscount).toFixed(2)
 }
+
 
 module.exports = {
-  yrsOverEighteen,
-  calculateNewBaseCost,
-  conditionFactor,
+  ageValidator,
+  baseByTwenty,
+  returnCostIncrease,
   femaleDiscount
 }
