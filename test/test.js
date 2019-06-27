@@ -94,7 +94,7 @@ describe('insurance quote estimator', () => {
     })
   })
   describe('femaleDiscount()', () => {
-    it('should subtract 12 dollars from final quote', () => {
+    it('should subtract 12 dollars from final quote for female discount', () => {
       let finalQuote = 120
       let expected = (108).toFixed(2)
       let actual = program.femaleDiscount(finalQuote)
