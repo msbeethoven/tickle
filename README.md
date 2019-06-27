@@ -29,7 +29,7 @@ TO OPEN: Simply follow (src/index.html) and click on `index.html` to see the app
 
 `HTML`, `CSS`, and `Javascript` were used to build this site's front end. `Mocha` was used a testing framework to test the truthiness of the functions that made up the parameters. _The actual logic being tested is in (src/logic.js) since `Mocha` does not have access to `document` (the browser) in the command line.
 
-To run tests, in the command line, run `npm test`
+To run tests, in the command line, run `npm test`.
 
 ## Notes
 
