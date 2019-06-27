@@ -22,15 +22,16 @@ function ageValidator(age) {
   let minAge = 18;
   if (age < minAge) {
     return 'This insurance policy is not available for those under 18 at this time.'
-    
-  } 
+
+  }
 
   let ageDifference = age - minAge
-    let multiplier = Math.floor(ageDifference / 5);
-    return multiplier;
+  let multiplier = Math.floor(ageDifference / 5);
+  return multiplier;
 }
 
-function baseByTwenty(fiveYears){
+
+function baseByTwenty(fiveYears) {
   let base = 100;
   let additionalCost = fiveYears * 20;
   return base + additionalCost;
@@ -51,7 +52,6 @@ function femaleDiscount(newEstimatedQuote) {
   let femaleFinalDiscount = newEstimatedQuote - femDiscount;
   return (femaleFinalDiscount).toFixed(2)
 }
-
 
 module.exports = {
   ageValidator,

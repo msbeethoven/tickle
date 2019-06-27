@@ -2,6 +2,7 @@ const assert = require('assert');
 const jsdom = require('jsdom');
 const mocha = require('mocha');
 const describe = mocha.describe
+const before = mocha.before;
 const it = mocha.it
 
 const { JSDOM } = jsdom;
@@ -12,6 +13,16 @@ const program = require('../src/functions.js')
 
 
 describe('insurance quote estimator', () => {
+  describe('baseByTwenty()', () => {
+    beforeEach(function() {
+      this.base === 100;
+    })
+    it('base amount should be 100', () => {
+      let expected = 100
+      let actual = program.baseByTwenty()
+      assert(expected === actual)
+    })
+  })
   describe('ageValidator()', () => {
     it('should be a number', () => {
       let age = 18
@@ -25,13 +36,13 @@ describe('insurance quote estimator', () => {
       let actual = program.ageValidator(age)
       assert(expected === actual)
     })
-    it('should return number of 5 year blocks over 18 years of age the customer is', () => {
+    it('should return the number of 5-year-blocks over 18 years of age', () => {
       let age = 23
       let expected = 1
       let actual = program.ageValidator(age)
       assert(expected === actual)
     })
-    it('should return number of 5 year blocks over 18 years of age the customer is', () => {
+    it('should return the number of 5-year-blocks over 18 years of age', () => {
       let age = 20
       let expected = 0
       let actual = program.ageValidator(age)
@@ -39,13 +50,13 @@ describe('insurance quote estimator', () => {
     })
   })
   describe('baseByTwenty()', () => {
-    it('should increase base cost by 20 dollars for every 5 years over 18', () => {
+    it('should return the number of 5-year-blocks over 18 years of age', () => {
       let fiveYrBlocks = 1
       let expected = 120
       let actual = program.baseByTwenty(fiveYrBlocks)
       assert(expected === actual)
     })
-    it('should increase base cost by 20 dollars for every 5 years over 18', () => {
+    it('should return the number of 5-year-blocks over 18 years of age', () => {
       let fiveYrBlocks = 3
       let expected = 160
       let actual = program.baseByTwenty(fiveYrBlocks)

@@ -18,25 +18,23 @@ const healthConditions = [
   },
   {
     issue: 'none',
-    costIncrease: 0.0
-
+    costIncrease: 0.00
   }
-
 ]
 
 function ageValidator(age) {
   let minAge = 18;
   if (age < minAge) {
     alert('This insurance policy is not available for those under 18 at this time.')
-    
-  } 
+
+  }
 
   let ageDifference = age - minAge
-    let multiplier = Math.floor(ageDifference / 5);
-    return multiplier;
+  let multiplier = Math.floor(ageDifference / 5);
+  return multiplier;
 }
 
-function baseByTwenty(fiveYears){
+function baseByTwenty(fiveYears) {
   let base = 100;
   let additionalCost = fiveYears * 20;
   return base + additionalCost;
@@ -45,7 +43,7 @@ function baseByTwenty(fiveYears){
 
 function returnCostIncrease(healthCondition, newCost) {
   let conditionPercent = healthConditions.filter(condition => condition.issue === healthCondition);
-  let costFactor = conditionPercent[0].costIncrease //the pure factor percentage 
+  let costFactor = conditionPercent[0].costIncrease //The pure factor percentage 
   let conditionBasePercentage = costFactor * newCost;
   let estimatedQuote = newCost + conditionBasePercentage
 
@@ -60,7 +58,7 @@ function femaleDiscount(newEstimatedQuote) {
 }
 
 
-function quoteCreator (customer){
+function quoteCreator(customer) {
   let age = customer.age
   let healthIssue = customer.issue
   let fiveYrBlocks = ageValidator(age)
@@ -73,30 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('insurance-form').addEventListener('submit', submit)
 })
 
-function submit (e) {
+function submit(e) {
   e.preventDefault()
-  let newCustomer = {} //Customer's state. 
+  let newCustomer = {} //Customer's state
   newCustomer.name = document.getElementById('name').value
   newCustomer.age = document.getElementById('age').value
   newCustomer.gender = document.querySelector('input[name="gender"]:checked').value
   newCustomer.issue = document.getElementById('health-condition').value
   let quote = quoteCreator(newCustomer)
-  console.log(newCustomer)
+  console.log(newCustomer) //Populated state
   displayQuote(newCustomer, quote)
 }
 
-function displayQuote (newCustomer, quote) {
+function displayQuote(newCustomer, quote) {
   let name = newCustomer.name;
   let priceDisplay = document.getElementById("your-price")
   priceDisplay.innerHTML = `${name}, your estimated quote is $${quote}`
 }
-
-
-
-
-
-
-
-
-
-
