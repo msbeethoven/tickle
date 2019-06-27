@@ -1,6 +1,7 @@
 //Allergies | 1%
 //Sleep Apnea | 6%
 //Heart Disease | 17%
+//None | 0%
 
 const healthConditions = [
   {
@@ -67,27 +68,26 @@ function quoteCreator (customer){
   return customer.gender === 'female' ? femaleDiscount(baseCostAndConditions) : baseCostAndConditions
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('insurance-form').addEventListener('submit', submit)
-})
+// document.addEventListener('DOMContentLoaded', () => {
+//   document.getElementById('insurance-form').addEventListener('submit', submit)
+// })
 
-function submit (e) {
-  e.preventDefault()
-  let newCustomer = {} //Customer's state. 
-  newCustomer.name = document.getElementById('name').value
-  newCustomer.age = document.getElementById('age').value
-  //newCustomer.gender = document.getElementById('gender').value
-  newCustomer.gender = document.querySelector('input[name="gender"]:checked').value
-  newCustomer.issue = document.getElementById('health-condition').value
-  let quote = quoteCreator(newCustomer)
-  console.log(newCustomer)
-  displayQuote(newCustomer, quote)
-}
+// function submit (e) {
+//   e.preventDefault()
+//   let newCustomer = {} //Customer's state. 
+//   newCustomer.name = document.getElementById('name').value
+//   newCustomer.age = document.getElementById('age').value
+//   newCustomer.gender = document.querySelector('input[name="gender"]:checked').value
+//   newCustomer.issue = document.getElementById('health-condition').value
+//   let quote = quoteCreator(newCustomer)
+//   console.log(newCustomer)
+//   displayQuote(newCustomer, quote)
+// }
 
-function displayQuote (newCustomer, quote) {
-  let priceDisplay = document.getElementById("your-price")
-  priceDisplay.innerHTML = 'Your Estimated Quote is: '+ quote;
-}
+// function displayQuote (newCustomer, quote) {
+//   let priceDisplay = document.getElementById("your-price")
+//   priceDisplay.innerHTML = 'Your Estimated Quote is: '+ quote;
+// }
 
 module.exports = {
   ageValidator,
